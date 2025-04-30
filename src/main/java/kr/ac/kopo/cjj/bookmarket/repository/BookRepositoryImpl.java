@@ -4,8 +4,7 @@ import kr.ac.kopo.cjj.bookmarket.domain.Book;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 //표시하는 어노테이션이다. 꼭 추가하자
 @Repository
@@ -86,14 +85,49 @@ public class BookRepositoryImpl implements BookRepository {
     @Override
     public List<Book> getBookByCategory(String category) {
         List<Book> booksByCategory = new ArrayList<>();
+
+        // 카테고리 중복 제거를 위한 리스트
         for (Book book : listOfBooks) {
             if (book.getCategory() != null && book.getCategory().equals(category)) {
                 booksByCategory.add(book);
             }
-            else{
+/*            else {
                 throw new IllegalArgumentException("해당 카테고리의 도서를 찾을 수 없습니다.");
+            }*/
+        }
+        if (booksByCategory.isEmpty()) {
+            throw new IllegalArgumentException("해당 카테고리의 도서를 찾을 수 없습니다.");
+        }
+        return booksByCategory;
+    }
+
+    @Override
+    public Set<Book> getBookByFilter(Map<String, List<String>> filter) {
+        Set<Book> booksByPublisher = new HashSet<Book>();
+        Set<Book> booksByCategory = new HashSet<Book>();
+        Set<String> booksByFilter = filter.keySet();
+
+        if(booksByFilter.contains("publisher")) {
+            for (int i =0; i < filter.get("publisher").size(); i++) {
+                String publisherName = filter.get("publisher").get(i);
+                for (Book book : listOfBooks) {
+                    if(publisherName.equals(book.getPublisher())) {
+                        booksByPublisher.add(book);
+                    }
+                }
+            }
+        if(booksByFilter.contains("category")) {
+            for (int i = 0; i < filter.get("category").size(); i++) {
+                String categoryName = filter.get("category").get(i);
+                //구지 리스트여야 하나?
+                List<Book> list = getBookByCategory(categoryName);
+                booksByCategory.addAll(list);
+                }
             }
         }
+
+        // 교집합을 구하기 위해 booksByCategory와 booksByPublisher를 비교
+        booksByCategory.retainAll(booksByPublisher);
         return booksByCategory;
     }
 
