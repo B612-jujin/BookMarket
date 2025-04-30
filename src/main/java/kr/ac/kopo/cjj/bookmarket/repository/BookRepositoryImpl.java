@@ -15,6 +15,7 @@ public class BookRepositoryImpl implements BookRepository {
         Book book1 = new Book();
         Book book2 = new Book();
         Book book3 = new Book();
+        Book book4 = new Book();
 
 
         book1.setBookId("isbn:0001");
@@ -50,10 +51,23 @@ public class BookRepositoryImpl implements BookRepository {
         book3.setReleaseDate(" 2015년 10월 20일");
         book3.setCondition("중고도서");
 
+        book4.setBookId("isbn:0004");
+        book4.setName("전지적 독자 시점");
+        book4.setUnitprice(BigDecimal.valueOf(12150));
+        book4.setAuthor("싱숑");
+        book4.setDescription("웹소설 읽기가 취미인 회사원 김독자. 퇴근길 지하철에 오른 그의 앞에 10년 동안 혼자 읽어온 웹소설 ‘멸살법’이 현실이 되어 펼쳐진다. 모두 혼돈과 공포에 빠져 있지만, 김독자 한 명만은 그 세상의 결말을 알고 있다.");
+        book4.setPublisher("비채");
+        book4.setCategory("소설");
+        book4.setUnitsInStock(9158);
+        book4.setReleaseDate("2020년 01월 20일");
+        book4.setCondition("웹소설");
+
+
 
         listOfBooks.add(book1);
         listOfBooks.add(book2);
         listOfBooks.add(book3);
+        listOfBooks.add(book4);
 
     }
 
@@ -129,6 +143,11 @@ public class BookRepositoryImpl implements BookRepository {
         // 교집합을 구하기 위해 booksByCategory와 booksByPublisher를 비교
         booksByCategory.retainAll(booksByPublisher);
         return booksByCategory;
+    }
+
+    @Override
+    public void setNewBook(Book book) {
+        listOfBooks.add(book);
     }
 
 

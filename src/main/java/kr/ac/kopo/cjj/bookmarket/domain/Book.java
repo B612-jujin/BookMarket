@@ -1,12 +1,14 @@
 package kr.ac.kopo.cjj.bookmarket.domain;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 //공백 두지 말고 ㅇㅇ 클래스 바로 위에 적어두자
-@Getter @Setter @NoArgsConstructor
+@Data
+//@Getter @Setter @NoArgsConstructor
 public class Book {
 
     private String bookId; //도서번호

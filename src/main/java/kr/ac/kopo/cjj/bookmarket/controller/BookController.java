@@ -6,6 +6,7 @@ import kr.ac.kopo.cjj.bookmarket.serveice.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -58,5 +59,27 @@ public class BookController {
         return "books";
 
     }
+
+    @GetMapping("/add")
+    public String requstAddBookForm() {
+
+        return "addBook";
+    }
+
+    @PostMapping("/add")
+    public String requstSubmitNewBook(@ModelAttribute("book") Book book) {
+        bookService.setNewBook(book);
+        return "redirect:/books";
+    }
+
+    @ModelAttribute
+    public void addAttribute(Model model) {
+        model.addAttribute("addTitle", "신규 도서 등록");
+    } // Model에 book이라는 객체를 추가하여, addBook.jsp에서 사용 가능하도록 함.
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setDisallowedFields("bookId","name","unitprice","author","description","publisher","category","unitsInStock","releaseDate","condition");
+    } // bookId는 사용자가 입력할 수 없도록 설정
 
 }
