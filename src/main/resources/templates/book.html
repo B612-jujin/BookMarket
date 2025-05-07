@@ -25,6 +25,12 @@
         </div>
 
         <div class="row align-items-md-stretch" style="background-color: #f5f5f5;">
+            <div class="col-md-4">
+                <img th:src="'/BookMarket/images/'+${book.getFileName()}" style="width: 90%">
+                <div class="text-center">
+                    <a style="text-decoration-line: none" th:href="@{download(file=${book.getFileName()})}">이미지 다운로드🗂️</a>
+                </div>
+            </div>
             <div class="col-md-12" style="background-color: #ececec; padding: 20px; margin: 10px;  border-radius: 8px; margin-bottom: 20px;">
                 <h3 th:text ="${book.getName()}"></h3>
                 <p th:text ="${book.getDescription()}"></p>

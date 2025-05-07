@@ -28,6 +28,7 @@ public class BookRepositoryImpl implements BookRepository {
         book1.setUnitsInStock(1000);
         book1.setReleaseDate("2024년 12월 31일");
         book1.setCondition("신규도서");
+        book1.setFileName("isbn0001.jpg");
 
         book2.setBookId("isbn:0002");
         book2.setName("꿈꾸는 책들의 도시");
@@ -39,6 +40,7 @@ public class BookRepositoryImpl implements BookRepository {
         book2.setUnitsInStock(1000);
         book2.setReleaseDate("2014년 08월 04일");
         book2.setCondition("중고도서");
+        book2.setFileName("isbn0002.jpg");
 
         book3.setBookId("isbn:0003");
         book3.setName("어린왕자");
@@ -50,8 +52,8 @@ public class BookRepositoryImpl implements BookRepository {
         book3.setUnitsInStock(1000);
         book3.setReleaseDate(" 2015년 10월 20일");
         book3.setCondition("중고도서");
-
-        book4.setBookId("isbn:0004");
+        book3.setFileName("isbn0003.jpg");
+/*        book4.setBookId("isbn:0004");
         book4.setName("전지적 독자 시점");
         book4.setUnitprice(BigDecimal.valueOf(12150));
         book4.setAuthor("싱숑");
@@ -60,14 +62,14 @@ public class BookRepositoryImpl implements BookRepository {
         book4.setCategory("소설");
         book4.setUnitsInStock(9158);
         book4.setReleaseDate("2020년 01월 20일");
-        book4.setCondition("웹소설");
+        book4.setCondition("웹소설");*/
 
 
 
         listOfBooks.add(book1);
         listOfBooks.add(book2);
         listOfBooks.add(book3);
-        listOfBooks.add(book4);
+//        listOfBooks.add(book4);
 
     }
 

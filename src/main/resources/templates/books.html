@@ -30,6 +30,7 @@
 
         <div class="row align-items-md-stretch text-center" style="background-color: #f5f5f5;">
             <div class="col-md-3" th:each="book:${bookList}" style="background-color: #ececec; padding: 20px; margin: 10px;  border-radius: 8px; margin-bottom: 20px;">
+                <img th:src="'/BookMarket/images/'+${book.getFileName()}" alt="image" style="width: 60%">
                 <h3 th:text ="${book.getName()}"></h3>
                 <p th:text ="${book.getAuthor()}"></p>
                 <p th:text ="${book.getPublisher()}+' | '+ ${book.getReleaseDate()}"></p>

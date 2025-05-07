@@ -25,7 +25,7 @@
         </div>
 
         <div class="row align-items-md-stretch">
-           <form action="/BookMarket/books/add" method="post">
+           <form action="/BookMarket/books/add" method="post" enctype="multipart/form-data">
                <legend th:text="${addTitle}"></legend>
                <div class="mb3 row">
                    <label class="col-sm-2 control-label">도서 ID</label>
@@ -57,47 +57,49 @@
                        <textarea name="description" class="form-control" cols="50" rows="2"></textarea>
                    </div>
                </div>
-               <div class="mb3 row">
+               <div class="mb-3 row">
                    <label class="col-sm-2 control-label">출판사</label>
                    <div class="col-sm-3">
                        <input type="text" name="publisher" class="form-control"/>
                    </div>
                </div>
-               <div class="mb3 row">
+               <div class="mb-3 row">
                    <label class="col-sm-2 control-label">분야</label>
                    <div class="col-sm-3">
                        <input type="text" name="category" class="form-control"/>
                    </div>
                </div>
-               <div class="mb3 row">
+               <div class="mb-3 row">
                    <label class="col-sm-2 control-label">재고량</label>
                    <div class="col-sm-3">
                        <input type="number" name="unitsInStock" class="form-control"/>
                    </div>
                </div>
-               <div class="mb3 row">
+               <div class="mb-3 row">
                    <label class="col-sm-2 control-label">출판일</label>
                    <div class="col-sm-3">
                        <input type="text" name="releaseDate" class="form-control"/>
                    </div>
                </div>
-               <div class="mb3 row">
+               <div class="mb-3 row">
                    <label class="col-sm-2 control-label">도서 상태</label>
                    <div class="col-sm-3">
-                       <input type="radio" name="condition" class="form-control" value="New"/>신규도서
-                       <input type="radio" name="condition" class="form-control" value="Old"/>중고도서
-                       <input type="radio" name="condition" class="form-control" value="E-Book"/>전자책
+                       <input type="radio" name="condition" value="New"/>신규도서
+                       <input type="radio" name="condition" value="Old"/>중고도서
+                       <input type="radio" name="condition" value="E-Book"/>전자책
                    </div>
                </div>
-               <div class="mb3 row">
+               <div class="mb-3 row">
+                   <label class="col-sm-2 control-label">도서이미지</label>
+                   <div class="col-sm-7">
+                       <input type="file" name="bookImage" class="form-control"/>
+                   </div>
+               </div>
+               <div class="mb-3 row">
                    <div class="col-sm-offset-2 col-sm-10">
                        <input type="submit" class="btn btn-primary" value="도서등록"/>
                    </div>
                </div>
-
-
-
-
            </form>
         </div>
 
