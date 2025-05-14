@@ -1,6 +1,5 @@
 package kr.ac.kopo.cjj.bookmarket.controller;
 
-import com.fasterxml.jackson.databind.Module;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.ac.kopo.cjj.bookmarket.domain.Book;
 import kr.ac.kopo.cjj.bookmarket.serveice.BookService;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -73,26 +71,28 @@ public class BookController {
     }
 
     @GetMapping("/add")
-    public String requstAddBookForm() {
-
+    public String requestAddBookForm() {
         return "addBook";
     }
 
     @PostMapping("/add")
-    public String requstSubmitNewBook(@ModelAttribute("book") Book book) {
+    public String requestSubmitNewBook(@ModelAttribute("book")Book book) {
         MultipartFile bookImage = book.getBookImage();
+        System.out.println("북 이미지 파일 이름 : " + bookImage.isEmpty());
         String saveName = bookImage.getOriginalFilename();
         File saveFile = new File(fileDir + saveName);
-        if (bookImage != null && !bookImage.isEmpty()) {//
+        if (bookImage != null && !bookImage.isEmpty()) {
             try {
                 bookImage.transferTo(saveFile);
-            } catch (Exception e) {
-                throw new RuntimeException("도서 이미지 업로드가 되지 않았습니다.", e);
+            } catch (IOException e) {
+                throw new RuntimeException("도서 이미지 업로드가 되지 않았습니다.");
             }
         }
         book.setFileName(saveName);
         bookService.setNewBook(book);
         return "redirect:/books";
+
+
     }
 
     @ModelAttribute
@@ -101,7 +101,7 @@ public class BookController {
     } // Model에 book이라는 객체를 추가하여, addBook.jsp에서 사용 가능하도록 함.
 
     @GetMapping("/download")//파일 다운로드 코드
-    public void downloadBookImage(@RequestParam("id") String paramKey, HttpServletResponse response) throws IOException {
+    public void downloadBookImage(@RequestParam("file") String paramKey, HttpServletResponse response) throws IOException {
         File imageFile = new File(fileDir + paramKey);
         response.setContentType("application/download");
         response.setHeader("Content-Disposition", "attachment; filename=\"" + paramKey + "\"");
@@ -111,15 +111,11 @@ public class BookController {
         FileCopyUtils.copy(fis,os);
         os.close();
         fis.close();
-
-
-
-
-    };
+            };
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.setDisallowedFields("bookId","name","unitprice","author","description","publisher","category","unitsInStock","releaseDate","condition","bookImage");
+        binder.setAllowedFields("bookId","name","unitprice","author","description","publisher","category","unitsInStock","releaseDate","condition","bookImage");
     } // bookId는 사용자가 입력할 수 없도록 설정
 
 }
