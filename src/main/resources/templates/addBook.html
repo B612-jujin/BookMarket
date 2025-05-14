@@ -25,60 +25,69 @@
         </div>
 
         <div class="row align-items-md-stretch">
-           <form action="/BookMarket/books/add" method="post" enctype="multipart/form-data">
+           <form th:object="${book}" action="/BookMarket/books/add" method="post" enctype="multipart/form-data">
                <legend th:text="${addTitle}"></legend>
                <div class="mb3 row">
                    <label class="col-sm-2 control-label">도서 ID</label>
                    <div class="col-sm-3">
-                       <input type="text" name="bookId" class="form-control"/>
+                       <input type="text" name="bookId" class="form-control" th:field="*{bookId}"/>
+                   </div>
+                   <div class="col-sm-6">
+                       <p class="text-danger" th:errors="*{bookId}"></p>
                    </div>
                </div>
                <div class="mb3 row">
                    <label class="col-sm-2 control-label">도서명</label>
                    <div class="col-sm-3">
-                       <input type="text" name="name" class="form-control"/>
+                       <input type="text" name="name" class="form-control" th:field="*{name}"/>
+                   </div>
+                   <div class="col-sm-6">
+                       <p class="text-danger" th:errors="*{name}"></p>
                    </div>
                </div>
                <div class="mb3 row">
                    <label class="col-sm-2 control-label">도서 가격</label>
                    <div class="col-sm-3">
-                       <input type="number" name="unitprice" class="form-control"/>
+                       <input type="number" name="unitprice" class="form-control" th:field="*{unitprice}"/>
+                   </div>
+                   <div class="col-sm-6">
+                       <p class="text-danger" th:errors="*{unitprice}"></p>
                    </div>
                </div>
                <div class="mb3 row">
                    <label class="col-sm-2 control-label">저자</label>
                    <div class="col-sm-3">
-                       <input type="text" name="author" class="form-control"/>
+                       <input type="text" name="author" class="form-control" th:field="*{author}"/>
                    </div>
                </div>
                <div class="mb3 row">
                    <label class="col-sm-2 control-label">도서 상세정보</label>
                    <div class="col-sm-3">
-                       <textarea name="description" class="form-control" cols="50" rows="2"></textarea>
+                       <textarea name="description" class="form-control" cols="50" rows="2" th:field="*{description}"></textarea>
                    </div>
                </div>
                <div class="mb-3 row">
                    <label class="col-sm-2 control-label">출판사</label>
                    <div class="col-sm-3">
-                       <input type="text" name="publisher" class="form-control"/>
+                       <input type="text" name="publisher" class="form-control" th:field="*{publisher}"/>
                    </div>
                </div>
                <div class="mb-3 row">
                    <label class="col-sm-2 control-label">분야</label>
                    <div class="col-sm-3">
-                       <input type="text" name="category" class="form-control"/>
+                       <input type="text" name="category" class="form-control" th:field="*{category}"/>
                    </div>
                </div>
                <div class="mb-3 row">
                    <label class="col-sm-2 control-label">재고량</label>
                    <div class="col-sm-3">
-                       <input type="number" name="unitsInStock" class="form-control"/>
+                       <input type="number" name="unitsInStock" class="form-control" th:field="*{unitsInStock}"/>
                    </div>
                </div>
                <div class="mb-3 row">
                    <label class="col-sm-2 control-label">출판일</label>
                    <div class="col-sm-3">
-                       <input type="text" name="releaseDate" class="form-control"/>
+                       <input type="text" name="releaseDate" class="form-control" th:field="*{releaseDate}"/>
                    </div>
                </div>
                <div class="mb-3 row">
@@ -92,7 +101,7 @@
                <div class="mb-3 row">
                    <label class="col-sm-2 control-label">도서이미지</label>
                    <div class="col-sm-7">
-                       <input type="file" name="bookImage" class="form-control"/>
+                       <input type="file" name="bookImage" class="form-control" th:field="*{bookImage}"/>
                    </div>
                </div>
                <div class="mb-3 row">

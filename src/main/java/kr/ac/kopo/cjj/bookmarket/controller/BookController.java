@@ -1,6 +1,7 @@
 package kr.ac.kopo.cjj.bookmarket.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import kr.ac.kopo.cjj.bookmarket.domain.Book;
 import kr.ac.kopo.cjj.bookmarket.serveice.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -71,12 +73,17 @@ public class BookController {
     }
 
     @GetMapping("/add")
-    public String requestAddBookForm() {
+    public String requestAddBookForm(Model model) {
+        model.addAttribute("book", new Book());
         return "addBook";
     }
 
     @PostMapping("/add")
-    public String requestSubmitNewBook(@ModelAttribute("book")Book book) {
+    public String requestSubmitNewBook(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult) {
+        // @Valid 어노테이션을 사용하여 Book 객체의 유효성 검사를 수행
+        if(bindingResult.hasErrors()) {
+            return "addBook";
+        }
         MultipartFile bookImage = book.getBookImage();
         System.out.println("북 이미지 파일 이름 : " + bookImage.isEmpty());
         String saveName = bookImage.getOriginalFilename();
