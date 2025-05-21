@@ -83,6 +83,9 @@
                    <div class="col-sm-3">
                        <input type="number" name="unitsInStock" class="form-control" th:field="*{unitsInStock}"/>
                    </div>
+                   <div class="col-sm-6">
+                       <p class="text-danger" th:errors="*{unitsInStock}"></p>
+                   </div>
                </div>
                <div class="mb-3 row">
                    <label class="col-sm-2 control-label">출판일</label>

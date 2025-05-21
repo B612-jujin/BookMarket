@@ -4,6 +4,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import kr.ac.kopo.cjj.bookmarket.domain.Book;
 import kr.ac.kopo.cjj.bookmarket.serveice.BookService;
+import kr.ac.kopo.cjj.bookmarket.validator.BookValidator;
+import kr.ac.kopo.cjj.bookmarket.validator.UnitsInStockValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,12 @@ import java.util.Set;
 public class BookController {
     @Autowired
     private BookService bookService; // 서비스계층과 연결
+
+//    @Autowired
+//    private UnitsInStockValidator unitsInStockValidator; // Validator를 사용하기 위해서 Autowired로 주입받음
+    @Autowired
+    private BookValidator bookValidator;
+
 
     @Value("${file.uploadDir}")
     String fileDir; // 업로드할 파일의 경로를 가져옴
@@ -122,6 +130,8 @@ public class BookController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
+        //binder.setValidator(unitsInStockValidator);
+        binder.setValidator(bookValidator);
         binder.setAllowedFields("bookId","name","unitprice","author","description","publisher","category","unitsInStock","releaseDate","condition","bookImage");
     } // bookId는 사용자가 입력할 수 없도록 설정
 

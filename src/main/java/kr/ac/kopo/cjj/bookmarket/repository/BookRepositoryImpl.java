@@ -18,7 +18,7 @@ public class BookRepositoryImpl implements BookRepository {
         Book book4 = new Book();
 
 
-        book1.setBookId("isbn:0001");
+        book1.setBookId("isbn0001");
         book1.setName("스프링 부트 완전정복");
         book1.setUnitprice(BigDecimal.valueOf(35000));
         book1.setAuthor("송미영");
@@ -30,7 +30,7 @@ public class BookRepositoryImpl implements BookRepository {
         book1.setCondition("신규도서");
         book1.setFileName("isbn0001.jpg");
 
-        book2.setBookId("isbn:0002");
+        book2.setBookId("isbn0002");
         book2.setName("꿈꾸는 책들의 도시");
         book2.setUnitprice(BigDecimal.valueOf(19800));
         book2.setAuthor("발터 뫼어스");
@@ -42,7 +42,7 @@ public class BookRepositoryImpl implements BookRepository {
         book2.setCondition("중고도서");
         book2.setFileName("isbn0002.jpg");
 
-        book3.setBookId("isbn:0003");
+        book3.setBookId("isbn0003");
         book3.setName("어린왕자");
         book3.setUnitprice(BigDecimal.valueOf(10620));
         book3.setAuthor("앙투안 드 생텍쥐페리");
