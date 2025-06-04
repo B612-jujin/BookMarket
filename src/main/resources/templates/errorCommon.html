@@ -20,11 +20,14 @@
         <div class="p-5 mb-4 bg-body-tertiary rounded-3">
             <div class="container-fluid py-5">
                 <h2 class="alert alert-danger">해당 카테고리는 존재하지 않습니다.</h2>
+                <p class="alert alert-danger">도서분야 : [[${category}]]</p>
+                <p class="alert alert-danger">주소 : [[${url}]]</p>
+                <p class="alert alert-danger">errorMessage : [[${errorMessage}]]</p>
             </div>
         </div>
 
         <div class="row align-items-md-stretch" style="background-color: #f5f5f5;">
-            <p>[[${exception}]]</p>
+
             <p><a href="/BookMarket/books" class = "btn btn-secondary" role="button">도서 목록으로 &raquo;</a></p>
         </div>
 
