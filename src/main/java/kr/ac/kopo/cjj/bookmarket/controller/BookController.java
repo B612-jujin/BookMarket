@@ -1,11 +1,13 @@
 package kr.ac.kopo.cjj.bookmarket.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import kr.ac.kopo.cjj.bookmarket.domain.Book;
+import kr.ac.kopo.cjj.bookmarket.exception.BookIdException;
+import kr.ac.kopo.cjj.bookmarket.exception.CategoryException;
 import kr.ac.kopo.cjj.bookmarket.serveice.BookService;
 import kr.ac.kopo.cjj.bookmarket.validator.BookValidator;
-import kr.ac.kopo.cjj.bookmarket.validator.UnitsInStockValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -68,6 +70,9 @@ public class BookController {
     @GetMapping("/{category}")
     public String requstBookByCategory(@PathVariable("category") String category, Model model) {
         List<Book> booksByCategory = bookService.getBookByCategory(category);
+        if (booksByCategory == null || booksByCategory.isEmpty()) {
+            throw new CategoryException();
+        }
         model.addAttribute("bookList", booksByCategory);
         return "books";
     };
@@ -134,5 +139,16 @@ public class BookController {
         binder.setValidator(bookValidator);
         binder.setAllowedFields("bookId","name","unitprice","author","description","publisher","category","unitsInStock","releaseDate","condition","bookImage");
     } // bookId는 사용자가 입력할 수 없도록 설정
+
+    @ExceptionHandler(value = {BookIdException.class})
+    public ModelAndView handleException(HttpServletRequest request, BookIdException e) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("invalidBookId", e.getBookId());
+        mav.addObject("exception", e.toString());
+        mav.addObject("url", request.getRequestURL()+"?"+request.getQueryString());
+        System.out.println("확인용");
+        mav.setViewName("errorbook");
+        return mav;
+    }
 
 }

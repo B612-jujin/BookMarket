@@ -1,12 +1,15 @@
 package kr.ac.kopo.cjj.bookmarket.repository;
 
 import kr.ac.kopo.cjj.bookmarket.domain.Book;
+import kr.ac.kopo.cjj.bookmarket.exception.BookIdException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.*;
 
 //표시하는 어노테이션이다. 꼭 추가하자
+@Slf4j
 @Repository
 public class BookRepositoryImpl implements BookRepository {
     private List<Book> listOfBooks = new ArrayList<Book>();
@@ -79,8 +82,6 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
 
-
-
     @Override
     public Book getBookById(String bookId) {
         Book bookInfo = null;
@@ -88,11 +89,14 @@ public class BookRepositoryImpl implements BookRepository {
         for (Book book : listOfBooks) {
             if (!book.getBookId().isEmpty() && book != null && book.getBookId().equals(bookId)) {
                 bookInfo = book;
+                System.out.println("해당 Book Id: " + book.getBookId());
                 break;
             }
         }
         if (bookInfo == null) {
-            throw new IllegalArgumentException("도서번호가" + bookId+"인 해당 도서를 찾을 수 없습니다.");
+            System.out.println("해당 도서를 찾을 수 없습니다. 도서번호: " + bookId);
+            throw new BookIdException(bookId);
+            //throw new IllegalArgumentException("도서번호가" + bookId+"인 해당 도서를 찾을 수 없습니다.");
         }
 
         return bookInfo;
@@ -111,9 +115,9 @@ public class BookRepositoryImpl implements BookRepository {
                 throw new IllegalArgumentException("해당 카테고리의 도서를 찾을 수 없습니다.");
             }*/
         }
-        if (booksByCategory.isEmpty()) {
+/*        if (booksByCategory.isEmpty()) {
             throw new IllegalArgumentException("해당 카테고리의 도서를 찾을 수 없습니다.");
-        }
+        }*/
         return booksByCategory;
     }
 
