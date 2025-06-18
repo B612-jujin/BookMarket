@@ -14,13 +14,21 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart create(Cart cart) {
-
         return cartPepository.create(cart);
     }
 
     @Override
     public Cart read(String cartId) {
-
         return cartPepository.read(cartId);
+    }
+    @Override
+    public void update(String cartId, Cart cart) {
+        cartPepository.update(cartId, cart);
+
+    }
+
+    @Override
+    public void delete(String cartId) {
+        cartPepository.delete(cartId);
     }
 }

@@ -23,12 +23,30 @@ public class CartRepositoryImpl implements CartPepository{
             throw new IllegalArgumentException("Cart with ID " + cart.getCartId() + " already exists.");
         }
         listOfCarts.put(cart.getCartId(), cart);
-        return null;
+        return cart;
+    }
+
+
+    @Override
+    public void update(String cartId, Cart cart) {
+        if(!listOfCarts.containsKey(cartId)) {
+            throw new IllegalArgumentException("장바구니 목록을 갱신할 수 없습니다. 장바구니가 존재하지 않습니다.");
+        }
+        listOfCarts.put(cartId, cart);
+
     }
 
     @Override
     public Cart read(String cartId) {
 
-        return null;
+        return listOfCarts.get(cartId);
+    }
+
+    @Override
+    public void delete(String cartId) {
+        if(!listOfCarts.containsKey(cartId)) {
+            throw new IllegalArgumentException("장바구니 목록을 갱신할 수 없습니다. 장바구니가 존재하지 않습니다.");
+        }
+        listOfCarts.remove(cartId);
     }
 }
