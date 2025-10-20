@@ -38,6 +38,8 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/books/add").hasRole("ADMIN")
+                        .requestMatchers("/order/list").hasRole("ADMIN")
+
                         .anyRequest().permitAll()
                 )
                 //따로 구현하자.formLogin(Customizer.withDefaults());

@@ -9,4 +9,6 @@ public interface CartService {
 
     void update(String cartId, Cart cart);
     void delete(String cartId); // 전체 카트 삭제
+
+    Cart validateCart(String cartId);
 }

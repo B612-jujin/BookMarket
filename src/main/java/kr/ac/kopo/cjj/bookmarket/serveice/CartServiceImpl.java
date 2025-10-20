@@ -1,6 +1,7 @@
 package kr.ac.kopo.cjj.bookmarket.serveice;
 
 import kr.ac.kopo.cjj.bookmarket.domain.Cart;
+import kr.ac.kopo.cjj.bookmarket.exception.CartExcption;
 import kr.ac.kopo.cjj.bookmarket.repository.CartPepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,13 @@ public class CartServiceImpl implements CartService {
     @Override
     public void delete(String cartId) {
         cartPepository.delete(cartId);
+    }
+
+    public Cart validateCart(String cartId) {
+        Cart cart = cartPepository.read(cartId);
+        if (cart == null) {
+            throw new CartExcption(cartId);
+        }
+        return cart;
     }
 }
