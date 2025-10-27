@@ -186,7 +186,7 @@ public class OrderController {
 
     @PostMapping("/save")
     public String saveProduct(@ModelAttribute Order order){
-        Order saveOrder = OrderProService.get(order.getOrderId());
+        Order saveOrder = orderProService.get(order.getOrderId());
         saveOrder.setOrderId(order.getOrderId());
         orderProService.save(saveOrder);
         return "redirect:/order/list";
