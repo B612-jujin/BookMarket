@@ -145,8 +145,8 @@ public class OrderController {
     public ModelAndView viewOrder(@PathVariable(value = "id") Long id) {
         Order order = orderProService.get(id);
         List<Book> listOfBooks = new ArrayList<Book>();
-        for (OrderItem orderItem : order.getOrderItems().values()) {
-            String bookId = orderItem.getBookId();
+        for (OrderItem item : order.getOrderItems().values()) {
+            String bookId = item.getBookId();
             Book book = bookService.getBookById(bookId);
             listOfBooks.add(book);
         }
@@ -165,6 +165,7 @@ public class OrderController {
             Book book = bookService.getBookById(bookId);
             listOfBooks.add(book);
         }
+
         ModelAndView modelAndView = new ModelAndView("orderEdit");
         modelAndView.addObject("order", order);
         modelAndView.addObject("bookList", listOfBooks);
@@ -187,7 +188,7 @@ public class OrderController {
     @PostMapping("/save")
     public String saveProduct(@ModelAttribute Order order){
         Order saveOrder = orderProService.get(order.getOrderId());
-        saveOrder.setOrderId(order.getOrderId());
+        saveOrder.setShipping(order.getShipping());
         orderProService.save(saveOrder);
         return "redirect:/order/list";
     }

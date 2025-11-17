@@ -17,4 +17,8 @@ public class OrderItem {
     private String bookId;
     private int quantity;
     private BigDecimal price;
+
+    public BigDecimal getTotalPrice() {
+        return price.multiply(BigDecimal.valueOf(quantity));
+    }
 }

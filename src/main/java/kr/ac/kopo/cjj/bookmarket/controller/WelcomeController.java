@@ -46,9 +46,9 @@ public class WelcomeController {
                 "        </div>\n" +
                 "\n" +
                 "        <footer class=\"pt-3 mt-4 text-body-secondary border-top\">\n" +
-                "            <spen class=\"{text-body-seconary}\">\n" +
+                "            <span class=\"{text-body-seconary}\">\n" +
                 "                &copy;2025 BookMarket\n" +
-                "            </spen>\n" +
+                "            </span>\n" +
                 "        </footer>\n" +
                 "    </div>\n" +
                 "</main>\n" +
